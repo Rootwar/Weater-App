@@ -42,9 +42,9 @@ header {
 			outline: none;
 		}
 	}
-	form {
-		overflow: hidden;
-	}
+	
+	.control-block { overflow: hidden;	}
+
 	.city-name {
 		text-shadow: 0 1px 0 #a8cd9e;
 		background-color: #81a777;
