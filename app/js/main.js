@@ -27,8 +27,11 @@ app.viewWeather = Backbone.View.extend({
     var cityValue = $('.city-name').val(),
         dataWeather;
     this.model.set('location',cityValue);
-    dataWeather = this.model.fetch();
-    return console.log(dataWeather);
+    dataWeather = this.model.fetch({
+      success: function() {
+        console.log(dataWeather.responseText);
+      }
+    });
   }
 });
 
