@@ -1,12 +1,17 @@
 var app = {};
 
 app.modelWeather = Backbone.Model.extend({
-  defaults: {}
+  defaults: {
+    location: 'Cherkassy'
+  },
+  url: function() {
+    return 'http://api.openweathermap.org/data/2.5/forecast?q=' +this.get('location')+ '&APPID=f1cc7b16448b8d7d8d281170e4b8e07f'
+  }
 });
+var weather = new app.modelWeather();
 
 app.collectionWeather = Backbone.Collection.extend({
-  model: app.modelWeather,
-  url: 'http://api.openweathermap.org/data/2.5/forecast?q=' +this.cityValue+ '&APPID=f1cc7b16448b8d7d8d281170e4b8e07f'
+  model: weather
 });
 allWeather = new app.collectionWeather();
 
@@ -18,15 +23,16 @@ app.viewWeather = Backbone.View.extend({
   events: {
     'click .search-city': 'loadWeather'
   },
-
   loadWeather: function() {
-    this.cityValue = $('.city-name').val();
-    this.collection.fetch();
+    var cityValue = $('.city-name').val(),
+        dataWeather;
+    this.model.set('location',cityValue);
+    dataWeather = this.model.fetch();
+    return console.log(dataWeather);
   }
-  
 });
 
 var view = new app.viewWeather({
-  collection: allWeather
+  model: weather
 });
 
