@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/weather.css">
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper weather-app">
     <header>
       <div class="outside-wrap">
         <h1 class="title">Bohdan's Weather App</h1>
@@ -24,6 +24,43 @@
       </div>
     </div>
   </div>
+  <script id="weatherTemplate" type="text/template">
+    <div class="weather-block">
+      <ul class="main-info list-unstyled">
+        <li class="clearfix">
+          <h2 class="text-center"><%- name %></h2>
+        </li>
+        <li class="clearfix">
+          <span class="pull-left">Date</span>
+          <span class="pull-left"><%= dt %></span>
+        </li>
+        <li class="clearfix">
+          <span class="pull-left">Temperature</span>
+          <span class="pull-left"><%= Math.round(main.temp - 273) %></span>
+        </li>
+      </ul>
+
+      <ul class="secondary-info list-unstyled">
+        <li>
+          <span>Max</span>
+          <span><%= Math.round(main.temp_max - 273) %></span>
+
+        </li>
+        <li>
+          <span>Min</span>
+          <span><%= Math.round(main.temp_min - 273) %></span>
+        </li>
+        <li>
+          <span>Humidity</span>
+          <span><%- main.humidity %></span>
+        </li>
+        <li>
+          <span>Speed Wind</span>
+          <span><%- wind.speed %></span>
+        </li>
+      </ul>
+    </div>
+  </script>
   <script src="/lib/jquery.js"></script>
   <script src="/lib/underscore.js"></script>
   <script src="/lib/backbone.js"></script>

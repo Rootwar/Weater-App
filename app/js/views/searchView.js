@@ -1,22 +1,38 @@
 app.viewWeather = Backbone.View.extend({
-  el: '.control-block',
+  el: '.weather-app',
+  template: _.template( $('#weatherTemplate').html() ),
 
   events: {
-    'click .search-city': 'loadWeather'
+    'click .search-city': 'loadWeather',
+    'input .city-name': 'loadWeather'
   },
+
+  initialize: function () {
+    this.model.fetch({
+      success: function() {
+        this.view.render();
+      }
+    });
+  },
+
+  render: function() {
+    this.$('.weather-wrap').html(this.template( this.model.toJSON() ));
+    return this;
+  },
+
   loadWeather: function() {
     var cityValue = $('.city-name').val(),
         dataWeather;
-    this.model.set('location',cityValue);
-    dataWeather = this.collection.fetch({
+    this.model.set('name',cityValue);
+    dataWeather = this.model.fetch({
       success: function() {
-        console.log(JSON.parse(dataWeather.responseText));
+        this.view.render();
       }
     });
   }
+
 });
 
 var view = new app.viewWeather({
-  model: weather,
-  collection: allWeather
+  model: weather
 });
