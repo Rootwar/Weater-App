@@ -4,7 +4,7 @@ app.viewWeather = Backbone.View.extend({
 
   events: {
     'click .search-city': 'loadWeather',
-    'input .city-name': 'loadWeather'
+    // 'input .city-name': 'loadWeather'
   },
 
   initialize: function () {
